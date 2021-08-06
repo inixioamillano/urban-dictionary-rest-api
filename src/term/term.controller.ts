@@ -39,8 +39,9 @@ export class TermController {
       }
     }
   })
-  findTerm(@Query('query') query: string) {
-    return this.termService.searchTerm(`/define.php?term=${query}`);
+  async findTerm(@Query('query') query: string) {
+    const words = await this.termService.searchTerm(`/define.php?term=${query}`);
+    return words.filter((item, index) => index !== 1);
   }
 
   @Get('/random')
@@ -71,7 +72,7 @@ export class TermController {
     }
   })
   random() {
-    return this.termService.searchTerm(`/random.php`);
+    return this.termService.searchTerm(`/random.php?page=${Math.floor(1000 * Math.random())}`);
   }
 
 }
