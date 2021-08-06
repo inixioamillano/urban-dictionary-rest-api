@@ -29,6 +29,6 @@ async function bootstrap() {
           && (password === process.env.STATS_PASS));
     }
   }));
-  await app.listen(3000);
+  await app.listen(process.env.PORT || 8080);
 }
 bootstrap();
